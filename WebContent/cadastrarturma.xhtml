@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro Turma|Portal do Aluno</title>
+	<!-- LOGOMARCA PORTAL DO ALUNO -->
+	<h:graphicImage library="img" name="logo-pa.png"
+		style="margin: 20px 0px 20px 30px;" />
+</h:head>
+
+<h:body>
+	<!-- <form method="post" action="cadastrarPessoa">	-->
+	
+	<!-- INICIO DO MENU -->
+	<h:form style="font-size:11px; margin-bottom: 10px;">
+		<p:megaMenu>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-extlink"
+				style="font-weight:bold" />
+			<p:submenu label="Cadastro" icon="ui-icon-disk"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Cadastro">
+						<p:menuitem value="Cadastrar Turma" url="cadastrarturma.xhtml" />
+						<p:menuitem value="Cadastrar Aluno" url="cadastraraluno.xhtml" />
+						<p:menuitem value="Cadastrar Professor"
+							url="cadastrarprofessor.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Lançamento" icon="ui-icon-pencil"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Lançamento">
+						<p:menuitem value="Lançar Aviso" url="lancaraviso.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Consulta" icon="ui-icon-search"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Consulta">
+						<p:menuitem value="Consultar Turma" url="consultarturma.xhtml" />
+						<p:menuitem value="Consultar Professor"
+							url="consultarprofessor.xhtml" />
+						<p:menuitem value="Consultar Aluno" url="consultaraluno.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Ajuda" icon="ui-icon-wrench"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Verificar Ajuda">
+						<p:menuitem value="Dúvidas sobre o Sistema"
+							url="ajuda-duvidas.xhtml" />
+						<p:menuitem value="Desenvolvimento" url="historico-desenv.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+		</p:megaMenu>
+	</h:form>
+
+	<p:panel id="cadastro" header="Cadastro de Turma"
+		style="font-size:12px; margin-bottom: 10px;" toggleable="true"
+		closable="true" toggleSpeed="500">
+		<h:form id="CadastroTurmaForm">
+			<h:panelGrid columns="5" cellpadding="5">
+
+
+				<table>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="anoEtapa" value="Ano/Etapa: *" />
+								<p:inputText id="anoEtapa" value="#{tb.turma.anoEtapa}"
+									label="Ano/Etapa" required="true" />
+								<p:message for="anoEtapa" />
+							</div>
+						</td>
+					</tr>
+
+				</table>
+			</h:panelGrid>
+
+			<p:separator />
+
+			<!-- BOTÃO LIMPAR -->
+			<p:commandButton value="Limpar" ajax="true" immediate="true"
+				type="reset" icon="ui-icon-close" />
+
+			<!-- BOTÃO CADASTRAR -->
+			<p:commandButton action="#{tb.cadastrarTurma()}" value="Salvar"
+				update=":resultadoFormulario @form" icon="ui-icon-disk" />
+		</h:form>
+	</p:panel>
+
+
+	<!-- TABELA DE CADSATROS -->
+	<h:form id="resultadoFormulario">
+		<p:panel id="resultado" header="Lista de Turmas"
+			style="font-size:12px;">
+
+			<p:dataTable var="turma" value="#{tb.turmas}">
+
+				<p:column headerText="Turma">
+					<h:outputText value="#{turma.anoEtapa}" />
+				</p:column>
+
+				<p:column headerText="Ação">
+					<p:commandButton action="#{tb.excluirTurma(turma)}"
+						icon="ui-icon-trash" update=":resultadoFormulario" />
+
+					<p:commandButton action="#{tb.seleciona(turma)}"
+						icon="ui-icon-arrowrefresh-1-w" update=":CadastroTurmaForm" />
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+
+</html>

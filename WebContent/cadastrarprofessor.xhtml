@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro Professor|Portal do Aluno</title>
+	<!-- LOGOMARCA PORTAL DO ALUNO -->
+	<h:graphicImage library="img" name="logo-pa.png"
+		style="margin: 20px 0px 20px 30px;" />
+</h:head>
+
+<h:body>
+
+	<!-- INICIO DO MENU -->
+	<h:form style="font-size:11px; margin-bottom: 10px;">
+		<p:megaMenu>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-extlink"
+				style="font-weight:bold;"/>
+			<p:submenu label="Cadastro" icon="ui-icon-disk"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Cadastro">
+						<p:menuitem value="Cadastrar Turma" url="cadastrarturma.xhtml" />
+						<p:menuitem value="Cadastrar Aluno" url="cadastraraluno.xhtml" />
+						<p:menuitem value="Cadastrar Professor" url="cadastrarprofessor.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Consulta" icon="ui-icon-search"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Consulta">
+						<p:menuitem value="Consultar Turma" url="consultarturma.xhtml" />
+						<p:menuitem value="Consultar Professor" url="consultarprofessor.xhtml" />
+						<p:menuitem value="Consultar Aluno" url="consultaraluno.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Ajuda" icon="ui-icon-wrench"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Verificar Ajuda">
+						<p:menuitem value="Dúvidas sobre o Sistema"
+							url="ajuda-duvidas.xhtml" />
+						<p:menuitem value="Desenvolvimento" url="historico-desenv.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+		</p:megaMenu>
+	</h:form>
+	<!-- FIM DO MENU -->
+
+	<p:panel id="cadastro" header="Cadastro de Professor"
+		style="font-size:12px; margin-bottom: 10px;" toggleable="true"
+		closable="true" toggleSpeed="500">
+
+		<h:form id="CadastroProfForm">
+			<h:panelGrid columns="4" cellpadding="5">
+				<table>
+				<tr>
+						<td>
+							<h:outputLabel for="dataMatricula" value="Data de Matrícula: *" />
+							<p:inputMask id="dataMatricula" value="#{pr.professor.dataMatricula}" style="width:100px;" label="dataMatricula" required="true" mask="99/99/9999">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</p:inputMask>
+							<p:message for="dataMatricula" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="matricula" value="Matrícula: *" />
+								<p:inputText id="matricula" value="#{pr.professor.matricula}"
+									label="Matricula" type="number" required="true"
+									onkeypress="validateNumber(event)" />
+								<p:message for="matricula" style="color: red" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="nome" value="Nome: *" />
+								<p:inputText id="nome" value="#{pr.professor.nome}"
+									style="width:300px;" label="Nome" required="true"
+									onkeypress="validateCaracter(event)" />
+								<p:message for="nome" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="sobrenome" value="Sobrenome: *" />
+								<p:inputText id="Sobrenome" value="#{pr.professor.sobrenome}"
+									style="width:300px;" label="Sobrenome" required="true"
+									onkeypress="validateCaracter(event)" />
+								<p:message for="nome" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<h:outputLabel for="sexo"  value="Sexo: *"/>
+							<p:selectOneRadio id="sexo" value="#{pr.professor.sexo}" required="true"> 
+								<f:selectItem  itemLabel="Masculino" itemValue="Masculino"/>
+								<f:selectItem  itemLabel="Feminino" itemValue="Feminino"/>
+							</p:selectOneRadio>
+							<p:message for="sexo"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="dataNascimento" value="Data de Nasc.: *" />
+							<p:inputMask id="dataNascimento" value="#{pr.professor.dataNascimento}" style="width:100px;" label="dataNascimento" required="true" mask="99/99/9999">
+								<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</p:inputMask>
+							<p:message for="dataNascimento" />
+						</td>
+					</tr>	
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="nomeMae" value="Nome da Mãe: *" />
+								<p:inputText id="nomeMae" value="#{pr.professor.nomeMae}"
+									style="width:300px;" label="NomeMae" required="true"
+									onkeypress="validateCaracter(event)" />
+								<p:message for="nomeMae" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="nomePai" value="Nome do Pai: *" />
+								<p:inputText id="nomePai" value="#{pr.professor.nomePai}"
+									style="width:300px;" label="NomePai" required="true"
+									onkeypress="validateCaracter(event)" />
+								<p:message for="nomePai" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="endereco" value="Endereço: *" />
+							<p:inputText id="endereco" value="#{pr.professor.endereco}" style="width:300px;" label="Matricula" required="true"/>
+							<p:message for="endereco" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="nmroEnd" value="Nº: *" />
+							<p:inputText id="nmroEnd" value="#{pr.professor.nmroEnd}" style="width:50px;" label="Nº" required="true"/>
+							<p:message for="nmroEnd" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="complemento" value="Complemento: " />
+							<p:inputText id="complemento" value="#{pr.professor.complemento}" style="width:100px;" label="Complemento" required="false"/>
+							<p:message for="complemento" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="bairro" value="Bairro: *" />
+							<p:inputText id="bairro" value="#{pr.professor.bairro}" style="width:100px;" label="Bairro" required="true"/>
+							<p:message for="bairro" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="cidade" value="Cidade: *" />
+							<p:inputText id="cidade" value="#{pr.professor.cidade}" style="width:100px;" label="Cidade" required="true"/>
+							<p:message for="cidade" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="uf" value="UF: *" />
+							<p:inputText id="uf" value="#{pr.professor.uf}" style="width:50px;" label="UF" required="true"/>
+							<p:message for="uf" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="celular1" value="Celular 1: *" />
+							<p:inputMask id="celular1" value="#{pr.professor.celular1}" style="width:100px" label="Celular1" required="true" mask="(999) 9999-9999" />
+							<p:message for="celular1" />	
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="celular2" value="Celular 2: " />
+							<p:inputMask id="celular2" value="#{pr.professor.celular2}" style="width:100px" label="Celular2" mask="(999) 9999-9999" />
+							<p:message for="celular2" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="telResidencial" value="Tel. Residencial: " />
+							<p:inputMask id="telResidencial" value="#{pr.professor.telResidencial}" style="width:100px" label="TelefoneResidencial" mask="(999) 9999-9999" />
+							<p:message for="telResidencial" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="contatoEmergencia" value="Contato de Emergência: *" />
+							<p:inputText id="contatoEmergencia" value="#{pr.professor.contatoEmergencia}" style="width:250px;" label="ContatoEmergencia" required="true"/>
+							<p:message for="contatoEmergencia" />						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel for="telEmergencia" value="Tel. Emergência: *" />
+							<p:inputMask id="telEmergencia" value="#{pr.professor.telEmergencia}" style="width:100px" label="TelefoneEmergencia" required="true" mask="(999) 9999-9999" />
+							<p:message for="telEmergencia" />	
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<h:outputLabel for="email" value="Email: *" />
+								<p:inputText id="email" value="#{pr.professor.email}"
+									validator="validatorEmail" label="E-mail" required="true"
+									style="width:300px;" />
+								<p:message for="email" style="color: red" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</h:panelGrid>
+
+			<p:separator />
+
+			<!-- BOTÃO LIMPAR -->
+			<p:commandButton value="Limpar" ajax="true" immediate="true"
+				type="reset" icon="ui-icon-close" />
+
+			<!-- BOTÃO CADASTRAR -->
+			<p:commandButton action="#{pr.cadastrarProfessor()}" value="Salvar"
+				update=":resultadoForm @form" icon="ui-icon-disk" />
+
+		</h:form>
+	</p:panel>
+
+	<!-- TABELA DE CADSATROS -->
+	<h:form id="resultadoForm">
+
+		<p:panel id="resultado" header="Lista de Pessoas"
+			style="font-size:12px;">
+
+			<!-- 		for (Pessoa pessoa: pessoas) -->
+			<p:dataTable var="professor" value="#{pr.professores}">
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{professor.nome}" />
+				</p:column>
+
+				<p:column headerText="Sobrenome">
+					<h:outputText value="#{professor.sobrenome}" />
+				</p:column>
+
+				<p:column headerText="Matrícula">
+					<h:outputText value="#{professor.matricula}" />
+				</p:column>
+
+				<p:column headerText="Email">
+					<h:outputText value="#{professor.email}" />
+				</p:column>
+
+				<p:column headerText="Ação">
+					<p:commandButton action="#{pr.excluirProfessor(professor)}"
+						icon="ui-icon-trash" update=":resultadoForm" />
+
+					<p:commandButton action="#{pr.seleciona(professor)}"
+						icon="ui-icon-arrowrefresh-1-w" update=":CadastroProfForm" />
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+	</h:form>
+
+	<!-- SCRIPTS DE BLOQUEIOS DE LETRAS E NÚMEROS -->
+	<script type="text/javascript">
+		function validateCaracter(e){
+			var caract = new RegExp('[a-zA-Z\\s]'); 
+			if(!caract.test(String.fromCharCode(e.keyCode))){
+				e.preventDefault();
+			}
+		}
+
+		function validateNumber(e){
+			var caract = new RegExp('[0-9]'); 
+			
+			if(!caract.test(String.fromCharCode(e.keyCode))){
+				e.preventDefault();
+			}
+		}
+	</script>
+
+</h:body>
+</html>
+
+

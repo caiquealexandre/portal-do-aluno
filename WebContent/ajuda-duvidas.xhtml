@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Dúvidas|Portal do Aluno</title>
+	<!-- LOGOMARCA PORTAL DO ALUNO -->
+	<h:graphicImage library="img" name="logo-pa.png"
+		style="margin: 20px 0px 20px 30px;" />
+</h:head>
+
+<h:body>
+
+	<!-- INICIO DO MENU -->
+	<h:form style="font-size:11px">
+		<p:megaMenu>
+			<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-extlink"
+				style="font-weight:bold" />
+			<p:submenu label="Cadastro" icon="ui-icon-disk"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Cadastro">
+						<p:menuitem value="Cadastrar Turma" url="cadastrarturma.xhtml" />
+						<p:menuitem value="Cadastrar Aluno" url="cadastraraluno.xhtml" />
+						<p:menuitem value="Cadastrar Professor"
+							url="cadastrarprofessor.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Lançamento" icon="ui-icon-pencil"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Lançamento">
+						<p:menuitem value="Lançar Aviso" url="lancaraviso.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Consulta" icon="ui-icon-search"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Realizar Consulta">
+						<p:menuitem value="Consultar Turma" url="consultarturma.xhtml" />
+						<p:menuitem value="Consultar Professor"
+							url="consultarprofessor.xhtml" />
+						<p:menuitem value="Consultar Aluno" url="consultaraluno.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			<p:submenu label="Ajuda" icon="ui-icon-wrench"
+				style="font-weight:bold">
+				<p:column>
+					<p:submenu label="Verificar Ajuda">
+						<p:menuitem value="Dúvidas sobre o Sistema"
+							url="ajuda-duvidas.xhtml" />
+						<p:menuitem value="Desenvolvimento" url="historico-desenv.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+		</p:megaMenu>
+	</h:form>
+	<!-- FIM DO MENU -->
+
+</h:body>
+</html>
